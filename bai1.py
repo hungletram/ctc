@@ -9,7 +9,7 @@ strtime0 = '2019-12-07T21:31:56.000Z'
 fprice = float(strprice.replace('$',''))
 
 # khai báo biến dttime0 và gán cho nó giá trị của strtime0
-dttime0 = datetime.strptime(strtime0.replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S.%f') 
+dttime0 = datetime.strptime(strtime0,'%Y-%m-%dT%H:%M:%S.%fZ') 
 
 # tạo biến dttime1 có giá trị bằng giá trị của dttime0 cộng thêm 1 giờ 2 phút 3 giây
 dttime1 = dttime0 + timedelta(hours=1,minutes=2,seconds=3)
