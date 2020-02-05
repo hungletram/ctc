@@ -21,3 +21,11 @@ for i in range(3):
     print('{} = {}, type: {}'.format(['fprice','dttime0','dttime1'][i],
                                      [fprice,dttime0,dttime1][i],
                                      type([fprice,dttime0,dttime1][i]),))
+'''
+Nhận xét:
+- float(strprice.replace('$','')), replace loại dấu $ thành chuỗi rỗng, để giá trị còn lại là số thực dạng chuỗi,
+sau đó chuyển kiểu thành số thực: float.
+- dttime0 = datetime.strptime(strtime0,'%Y-%m-%dT%H:%M:%S.%fZ'), strptime chuyển kiểu chuỗi thành datetime
+theo một định dạng nhất định.
+- dttime1 = dttime0 + timedelta(hours=1,minutes=2,seconds=3), timedelta thực hiện tính toán kiểu dữ liệu datetime.
+'''
