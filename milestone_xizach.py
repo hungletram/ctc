@@ -3,7 +3,7 @@ deck = []
 for i in range(4):
     deck += [0,2,3,4,5,6,7,8,9,10,10,10,10]
 
-# Chọn bài Xì Dách vì gần gũi với người Việt hơn.
+# Chọn bài Xì Dách vì gần gũi với người Việt.
 
 class player():
     def __init__(self,bet):
