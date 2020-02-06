@@ -111,11 +111,11 @@ while playmore != '0':
             else:
                 while ((1-(12/13)**(21-ai.value())) > (1-21/(len(humans[p].cards)*13))) and (abs(ai.value()) < 21):
                     ai.cards += [deck.pop(0)]
-        print('- Computer\'s cards {} add up to {}. {} {}, your bank has {}.'.format(ai.cards,ai.value(),humans[p].name,result(humans[p],ai),humans[p].bank))
+        print('- Computer\'s cards {} add up to {}. {} {}, your bank has {:,}.'.format(ai.cards,ai.value(),humans[p].name,result(humans[p],ai),humans[p].bank))
     playmore = str(input('\nPlay more? (0 = no, 1 = yes) '))
     print()
 else:
     print('FINAL RESULTS')
-    print('Computer has {} in the bank.'.format(ai.bank))
+    print('Computer has {:,} in the bank.'.format(ai.bank))
     for p in range(n):
-        print('{} has {} in the bank.'.format(humans[p].name,humans[p].bank))
+        print('{} has {:,} in the bank.'.format(humans[p].name,humans[p].bank))
