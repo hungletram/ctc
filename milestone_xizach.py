@@ -38,7 +38,7 @@ class player():
         return s
 
 def result(player,ai):
-    value = lambda v: 0 if v.value() > 21 else v.value()
+    value = lambda v: 0 if v.value() in range(22,100) else v.value()
     if value(ai) > value(player):
         ai.bank += player.bet
         player.bank -= player.bet
@@ -83,10 +83,12 @@ while playmore != '0':
             while draw(humans[p]):
                 humans[p].cards += [deck.pop(0)]
             if abs(humans[p].value()) < 21:
-                draw1 = str(input('{}: {} = {}. Draw more (0 = no, 1 = yes)? '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
+                draw1 = str(input('{}: {} = {}. Draw more? (0 = no, 1 = yes) '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
             while abs(humans[p].value()) < 21 and draw1 != '0':
                 humans[p].cards += [deck.pop(0)]
-                draw1 = str(input('{}: {} = {}. Draw more (0 = no, 1 = yes)? '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
+                while draw(humans[p]):
+                    humans[p].cards += [deck.pop(0)]
+                draw1 = str(input('{}: {} = {}. Draw more? (0 = no, 1 = yes) '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
             else:
                 announce += ['- {} cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
 
