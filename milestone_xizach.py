@@ -3,7 +3,7 @@ deck = []
 for i in range(4):
     deck += [0,2,3,4,5,6,7,8,9,10,10,10,10]
 
-# Chọn bài Xì Dách vì gần gũi với người Việt.
+# Chọn bài Xì Dách vì gần gũi với người Việt hơn.
 
 class player():
     def __init__(self,bet):
@@ -33,14 +33,14 @@ class player():
 
 draw = lambda p: abs(p.value()) < 16
 
+ai = player(0)
+n = int(input('Number of players: '))
+humans = [player(int(input('Player {} bets: '.format(i+1)))) for i in range(n)]
+players = humans + [ai]
+
 playmore = '1'
 
 while playmore == '1':
-    n = int(input('Number of players: '))
-    humans = [player(int(input('Player {} bets: '.format(i+1)))) for i in range(n)]
-    ai = player(0)
-
-    players = humans + [ai]
     dealing =[i for i in range(n+1)]*2
     for p in dealing:
         players[p].cards += [deck.pop(random.randint(0,len(deck)-1))]
