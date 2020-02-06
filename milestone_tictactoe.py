@@ -6,8 +6,7 @@ def tictactoe():
     pick_marker = str(input('Player 1 picks (X/O): ')).upper()
     m1 = 'X' if pick_marker != 'O' else 'O'
     m2 = 'O' if m1 == 'X' else 'X'
-    def nextmove(position):
-        return ' ' in position
+    nextmove = lambda p: ' ' in p
     def winning(position):
         p = []
         for i in position:
