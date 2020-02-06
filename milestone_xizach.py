@@ -18,21 +18,22 @@ class player():
         self.bet = 0
         self.cards = []
     def value(self):
+        s_min = sum(self.cards) + self.cards.count(0)
         if sum(self.cards) == 0:
             s = 21
-        elif sum(self.cards) + self.cards.count(0) <= 21:
+        elif s_min <= 21:
             if len(self.cards) == 5:
-                s = 100 - sum(self.cards)
+                s = 100 - s_min
             else:
                 if 0 not in self.cards:
                     s = sum(self.cards)
                 else:
                     if sum(self.cards) > 11:
-                        s = sum(self.cards) + self.cards.count(0)
+                        s = s_min
                     elif sum(self.cards) == 11:
-                        s = sum(self.cards) + 10 if self.cards.count(0) == 1 else sum(self.cards) + self.cards.count(0)
+                        s = sum(self.cards) + 10 if self.cards.count(0) == 1 else s_min
                     else:
-                        s = sum(self.cards) + self.cards.count(0) if (self.cards.count(0)>(11-sum(self.cards))) else sum(self.cards) + 11 + self.cards.count(0)-1
+                        s = s_min if s_min > 11 else s_min + 10
         else:
             s = sum(self.cards)
         return -s if s in range(22,79) else s
@@ -73,45 +74,50 @@ while playmore != '0':
     for p in dealing:
         players[p].cards += [deck.pop(0)]
 
-    announce = []
+    if ai.value() == 21:
+        print('- Computer cards {} add up to 21.'.format(ai.cards))
+        for p in humans:
+            print('- {} {}. Your bank has {}.'.format(p.name,result(p,ai),p.bank))
+    else:
+        announce = []
 
-    for p in range(len(humans)):
-        if humans[p].value() == 21:
-            announce += ['- {} cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
-        else:
-            while draw(humans[p]):
-                humans[p].cards += [deck.pop(0)]
-            if abs(humans[p].value()) < 21:
-                draw1 = str(input('{}: {} = {}. Draw more? (0 = no, 1 = yes) '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
-            while abs(humans[p].value()) < 21 and draw1 != '0':
-                humans[p].cards += [deck.pop(0)]
+        for p in range(len(humans)):
+            if humans[p].value() == 21:
+                announce += ['- {} cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
+            else:
                 while draw(humans[p]):
                     humans[p].cards += [deck.pop(0)]
-                draw1 = str(input('{}: {} = {}. Draw more? (0 = no, 1 = yes) '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
-            else:
-                announce += ['- {} cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
+                if abs(humans[p].value()) < 21:
+                    draw1 = str(input('{}: {} = {}. Draw more? (0 = no, 1 = yes) '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
+                while abs(humans[p].value()) < 21 and draw1 != '0':
+                    humans[p].cards += [deck.pop(0)]
+                    while draw(humans[p]):
+                        humans[p].cards += [deck.pop(0)]
+                    draw1 = str(input('{}: {} = {}. Draw more? (0 = no, 1 = yes) '.format(humans[p].name,humans[p].cards,humans[p].value()))) if abs(humans[p].value()) < 21 else 0
+                else:
+                    announce += ['- {} cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
 
-    for i in announce:
-        print(i)
+        for i in announce:
+            print(i)
 
-    while draw(ai):
-        ai.cards += [deck.pop(0)]
-    print('RESULT')
+        while draw(ai):
+            ai.cards += [deck.pop(0)]
+        print('RESULT')
 
-    cards = [len(p.cards) for p in humans]
+        cards = [len(p.cards) for p in humans]
 
-    while sum(cards) > 0:
-        p = cards.index(max(cards))
-        cards[p] = 0
-        if abs(ai.value()) < 21:
-            if len(humans[p].cards) == 2:
-                if humans[p].value() != 21:
-                    while ((1-(12/13)**(21-ai.value())) > (ai.value()-16)/6) and (abs(ai.value()) < 21):
+        while sum(cards) > 0:
+            p = cards.index(max(cards))
+            cards[p] = 0
+            if abs(ai.value()) < 21:
+                if len(humans[p].cards) == 2:
+                    if humans[p].value() != 21:
+                        while ((1-(12/13)**(21-ai.value())) > (ai.value()-16)/6) and (abs(ai.value()) < 21):
+                            ai.cards += [deck.pop(0)]
+                else:
+                    while ((1-(12/13)**(21-ai.value())) > (1-21/(len(humans[p].cards)*13))) and (abs(ai.value()) < 21):
                         ai.cards += [deck.pop(0)]
-            else:
-                while ((1-(12/13)**(21-ai.value())) > (1-21/(len(humans[p].cards)*13))) and (abs(ai.value()) < 21):
-                    ai.cards += [deck.pop(0)]
-        print('- Computer cards {} add up to {}. {} {}, your bank has {:,}.'.format(ai.cards,ai.value(),humans[p].name,result(humans[p],ai),humans[p].bank))
+            print('- Computer cards {} add up to {}. {} {}, your bank has {:,}.'.format(ai.cards,ai.value(),humans[p].name,result(humans[p],ai),humans[p].bank))
     playmore = str(input('\nPlay more? (0 = no, 1 = yes) '))
     print()
 else:
