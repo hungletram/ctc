@@ -1,6 +1,6 @@
 import random
 
-# Chọn bài Xì Dách vì gần gũi với người Việt hơn.
+# Chọn bài Xì Dách vì gần gũi với người Việt.
 
 print('WELCOME TO BLACKJACK!')
 print('+'+'-'*18+'+')
@@ -20,9 +20,9 @@ class player():
     def value(self):
         if sum(self.cards) == 0:
             s = 21
-        elif sum(self.cards) <= 21:
+        elif sum(self.cards) + self.cards.count(0) <= 21:
             if len(self.cards) == 5:
-                s = 100
+                s = 100 - sum(self.cards)
             else:
                 if 0 not in self.cards:
                     s = sum(self.cards)
@@ -30,15 +30,15 @@ class player():
                     if sum(self.cards) > 11:
                         s = sum(self.cards) + self.cards.count(0)
                     elif sum(self.cards) == 11:
-                        s = sum(self.cards) + 10
+                        s = sum(self.cards) + 10 if self.cards.count(0) == 1 else sum(self.cards) + self.cards.count(0)
                     else:
-                        s = sum(self.cards) + 11
+                        s = sum(self.cards) + self.cards.count(0) if (self.cards.count(0)>(11-sum(self.cards))) else sum(self.cards) + 11 + self.cards.count(0)-1
         else:
-            s = - sum(self.cards)
-        return s
+            s = sum(self.cards)
+        return -s if s in range(22,79) else s
 
 def result(player,ai):
-    value = lambda v: 0 if v.value() in range(22,100) else v.value()
+    value = lambda v: 0 if v.value() < 0 else v.value()
     if value(ai) > value(player):
         ai.bank += player.bet
         player.bank -= player.bet
@@ -77,9 +77,8 @@ while playmore != '0':
 
     for p in range(len(humans)):
         if humans[p].value() == 21:
-            announce += ['- {}\'s cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
+            announce += ['- {} cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
         else:
-            # print('Your cards: {} = {}.'.format(you,value(you)))
             while draw(humans[p]):
                 humans[p].cards += [deck.pop(0)]
             if abs(humans[p].value()) < 21:
@@ -104,18 +103,19 @@ while playmore != '0':
     while sum(cards) > 0:
         p = cards.index(max(cards))
         cards[p] = 0
-        if ai.value() > 0 and ai.value() < 21:
+        if abs(ai.value()) < 21:
             if len(humans[p].cards) == 2:
-                while ((1-(12/13)**(21-ai.value())) > (ai.value()-16)/6) and (abs(ai.value()) < 21):
-                    ai.cards += [deck.pop(0)]
+                if humans[p].value() != 21:
+                    while ((1-(12/13)**(21-ai.value())) > (ai.value()-16)/6) and (abs(ai.value()) < 21):
+                        ai.cards += [deck.pop(0)]
             else:
                 while ((1-(12/13)**(21-ai.value())) > (1-21/(len(humans[p].cards)*13))) and (abs(ai.value()) < 21):
                     ai.cards += [deck.pop(0)]
-        print('- Computer\'s cards {} add up to {}. {} {}, your bank has {:,}.'.format(ai.cards,ai.value(),humans[p].name,result(humans[p],ai),humans[p].bank))
+        print('- Computer cards {} add up to {}. {} {}, your bank has {:,}.'.format(ai.cards,ai.value(),humans[p].name,result(humans[p],ai),humans[p].bank))
     playmore = str(input('\nPlay more? (0 = no, 1 = yes) '))
     print()
 else:
-    print('FINAL RESULTS')
+    print('FINAL RESULT')
     print('Computer has {:,} in the bank.'.format(ai.bank))
     for p in range(n):
         print('{} has {:,} in the bank.'.format(humans[p].name,humans[p].bank))
