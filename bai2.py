@@ -1,5 +1,5 @@
 hoten = str(input('Xin chào! Hãy nhập tên đầy đủ bên dưới:\n'))
-while hoten == '':
+while not (all(i.isalpha() for i in hoten.split()) and hoten != ''):
     hoten = str(input('Xin nhập lại họ tên:\n'))
 ten_list = [i.capitalize() for i in hoten.split()]
 hoten = ' '.join(ten_list)
