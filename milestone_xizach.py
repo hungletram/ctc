@@ -11,33 +11,56 @@ print('| 10: 10, J, Q, K' + '|'.rjust(3,' '))
 print('+'+'-'*18+'+')
 print()
 
+# tạo đối tượng người chơi, gồm tên, tài khoản, đặt cược và lá bài
 class player():
     def __init__(self,name):
         self.name = name
         self.bank = 0
         self.bet = 0
         self.cards = []
+        
+    # phương thức tính toán số nút bài trên tay người chơi
     def value(self):
+        # s_min = số nút trên tay khi coi Ace = 1 nút
         s_min = sum(self.cards) + self.cards.count(0)
+        
+        # xì bàn
         if sum(self.cards) == 0:
             s = 21
+        
+        # không quắc
         elif s_min <= 21:
+            
+            # ngũ linh: thắng xì bàn và ngũ linh lớn nút hơn
             if len(self.cards) == 5:
                 s = 100 - s_min
+
+            # không ngũ linh
             else:
+                # không có Ace
                 if 0 not in self.cards:
                     s = sum(self.cards)
+                # có Ace
                 else:
+                    # số nút còn lại > 11, Ace = 1 nút
                     if sum(self.cards) > 11:
                         s = s_min
+                    # số nút còn lại = 11 và có 1 Ace thì Ace = 10, có hơn 1 Ace thì Ace = 1
                     elif sum(self.cards) == 11:
                         s = sum(self.cards) + 10 if self.cards.count(0) == 1 else s_min
+                    # (số nút còn lại < 11 nút) và (số Ace > 11 - số nút còn lại) thì tính Ace = 1
+                    # <= số nút còn lại thì 1 con Ace = 11, còn lại tính Ace = 1
                     else:
                         s = s_min if s_min > 11 else s_min + 10
+        # quắc
         else:
             s = sum(self.cards)
+            
+        # nếu quắc thì xuất số âm, không quắc thì xuất số dương
         return -s if s in range(22,79) else s
 
+# rảnh sẽ comment tiếp >__<
+    
 def result(player,ai):
     value = lambda v: 0 if v.value() < 0 else v.value()
     if value(ai) > value(player):
