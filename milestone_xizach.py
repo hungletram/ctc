@@ -95,6 +95,7 @@ while playmore != '0':
     for p in dealing:
         players[p].cards += [deck.pop(0)]
 
+    # game starts
     if ai.value() == 21:
         print('- Computer cards {} add up to 21.'.format(ai.cards))
         for p in humans:
@@ -102,6 +103,7 @@ while playmore != '0':
     else:
         announce = []
 
+        # human
         for p in range(len(humans)):
             if humans[p].value() == 21:
                 announce += ['- {} cards {} add up to {}.'.format(humans[p].name,humans[p].cards,humans[p].value())]
