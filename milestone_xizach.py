@@ -58,8 +58,6 @@ class player():
             
         # nếu quắc thì xuất số âm, không quắc thì xuất số dương
         return -s if s in range(22,79) else s
-
-# rảnh sẽ comment tiếp >__<
     
 def result(player,ai):
     value = lambda v: 0 if v.value() < 0 else v.value()
