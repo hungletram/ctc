@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<meta charset="utf8">
+
+<html>
+
+<head>
+  <script src="js/jquery-3.4.1.js"></script>
+  <link rel="stylesheet" href="css/mystyle.css">
+</head>
+
+<body>
+  <header>
+
+    <!-- grey bar -->
+    <div class="top1"></div>
+
+    <!-- date, search bar -->
+    <div class="top2">
+      <div class="left"><img src="img/icon-timer-header.png"></div>
+      <div class="left"><p id="topdate">DATETIME VALUE</p></div>
+      <a class="hot-line" title="Hotline: 0855.911.911" onclick="tel()">
+        <img src="img/cal.png" alt="Hotline :0855.911.911">
+        <span class="text-hotline">0855.911.911</span>
+      </a>
+      <div id="search-box">
+        <img src="img/search.png">
+        <input type="text" placeholder="Tìm kiếm trên VTC News">
+      </div>
+    </div>
+
+    <!-- logo -->
+    <div class="top3">
+      <img src="img/logo.png" class="logo" alt="Báo điện tử VTC News - Đọc tin tức 24h trong ngày hôm nay">
+      <div class="ads" style="width: 728px;height: 90px;float: right;font-size: calc(.05*728px);"><p>Quảng cáo</p></div>
+    </div>
+
+    <!-- menu -->
+    <div class="top4" id="ontop">
+      <ul>
+          <li class="home"><a href="/" title="Trang chủ"><img src="img/Homepage.png"></a></li>
+          <li class="menu"><a href="/" title="Thời sự">Thời sự</a><i></i></li>
+          <li class="menu"><a href="/" title="Truyền hình">Truyền hình</a><i></i></li>
+          <li class="menu"><a href="/" title="Kinh tế">Kinh tế</a><i></i></li>
+          <li class="menu"><a href="/" title="Thế giới">Thế giới</a><i></i></li>
+          <li class="menu"><a href="/" title="Giáo dục">Giáo dục</a><i></i></li>
+          <li class="menu"><a href="/" title="Pháp luật">Pháp luật</a><i></i></li>
+          <li class="menu"><a href="/" title="Văn hóa - Giải trí">Văn hóa - Giải trí</a><i></i></li>
+          <li class="menu"><a href="/" title="Thể thao">Thể thao</a><i></i></li>
+          <li class="menu"><a href="/" title="Sức khỏe">Sức khỏe</a></li>
+          <li class="menu"><a href="#" class="dots">●●●</a>
+            <ul class="sub-menu">
+              <li class="sub-menu-item"><a href="/phong-su-kham-pha.html" title="Phóng sự - Khám phá">Phóng sự - Khám phá</a></li>
+              <li class="sub-menu-item"><a href="/oto-xe-may.html" title="Ôtô - Xe máy">Ôtô - Xe máy</a></li>
+              <li class="sub-menu-item"><a href="/khoa-hoc-cong-nghe.html" title="Khoa học - Công nghệ">Khoa học - Công nghệ</a></li>
+              <li class="sub-menu-item"><a href="/doanh-nghiep-doanh-nhan.html" title="Doanh nghiệp - Doanh nhân">Doanh nghiệp - Doanh nhân</a></li>
+              <li class="sub-menu-item"><a href="/dia-oc.html" title="Bất động sản">Bất động sản</a></li>
+              <li class="sub-menu-item"><a href="/gia-dinh.html" title="Đời sống">Đời sống</a></li>
+              <li class="sub-menu-item no-bottom"><a href="/song-dep.html" title="Sống Đẹp">Sống Đẹp</a></li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+
+    <!-- white area -->
+    <div class="top5"></div>
+
+  </header>
+  <div class="container">
+    <!-- headlines -->
+    <div class="section headlines">
+      <div class="first-post">
+        <img src="img/1.jpg" title="Cận cảnh trạm phát sóng Bạch Mai bị đập phá ngay trước ngày được lập hồ sơ di tích">
+        <h2>Cận cảnh trạm phát sóng Bạch Mai bị đập phá ngay trước ngày được lập hồ sơ di tích</h2>
+        <p>Đơn vị thi công đập phá căn nhà của cụm công trình Trạm phát sóng Bạch Mai, trước khi UBND TP. Hà Nội giao Sở Văn hóa, Thể thao Hà Nội lập hồ sơ công nhận là di tích lịch sử văn hóa cấp thành phố.</p>
+      </div>
+      <div class="scroll-column">
+        <div class="scroll-item parallel no-top-padding"><div style="width: 30%;"><img src="img/2.jpg" title="SCMP: Ít nhất 500 nhân viên y tế ở Vũ Hán nhiễm virus corona"></div><div style="max-width: 60%;"><p>SCMP: Ít nhất 500 nhân viên y tế ở Vũ Hán nhiễm virus corona</p></div></div>
+        <div class="scroll-item parallel"><div style="width: 30%;"><img src="img/3.jpg" title="Khởi tố tài xế Mercedes tông chết lái xe GrabBike, nữ tiếp viên hàng không bị thương nặng"></div><div style="max-width: 60%;"><p>Khởi tố tài xế Mercedes tông chết lái xe GrabBike, nữ tiếp viên hàng không bị thương nặng</p></div></div>
+        <div class="scroll-item parallel no-bottom"><div style="width: 30%;"><img src="img/4.jpg" title="Vĩnh Phúc cách ly 6 học sinh, 2 giáo viên tiếp xúc với người dương tính virus corona"></div><div style="max-width: 60%;"><p>Vĩnh Phúc cách ly 6 học sinh, 2 giáo viên tiếp xúc với người dương tính virus corona</p></div></div>
+      </div>
+      <div class="ads" style="width: 25%;height: 250px;float: right;font-size: calc(.05*300px);"><p>Quảng cáo</p></div>
+    </div>
+
+    <!-- more-news -->
+    <div class="section more-news">
+      <div style="width: 100%;background: red;"><img src="img/1.jpg" alt=""></div>
+    </div>
+
+    <!-- categories -->
+    <div class="section categories">
+      <div style="width: 100%;background: red;"><img src="img/1.jpg" alt=""></div>
+    </div>
+
+    <!-- info -->
+    <div class="section info">
+      <div style="width: 100%;background: red;"><img src="img/1.jpg" alt=""></div>
+    </div>
+
+    <!-- footer -->
+    <div class="section footer">
+      <div style="width: 100%;background: red;"><img src="img/1.jpg" alt=""></div>
+    </div>
+  </div>
+</body>
+
+<script src="js/myscript.js"></script>
+
+</html>
