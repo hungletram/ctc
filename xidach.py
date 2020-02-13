@@ -23,7 +23,7 @@ class deck_of_cards():
     def shuffle(self):
         random.shuffle(self.deck)
 
-    # Chia bài, xoay tua với số tua bằng số lá bài chia cho mỗi người
+    # Chia bài
     def dealing(self,everyone,number_of_cards):
         if len(everyone) * number_of_cards > len(self.deck):
             print('Không đủ bài để chia.')
