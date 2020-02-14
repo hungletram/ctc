@@ -82,7 +82,7 @@ class player_xidach():
         # Quắc
         else:
             s = 0
-        return 0
+        return s
     
     # Người chơi chưa đủ tuổi
     premature = lambda self: (self.value() in range(1,16)) and (len(self.cards) < 5)
@@ -108,10 +108,10 @@ class dealer_xidach(player_xidach):
         if self.value() in range(16,21):
             if len(player.cards) == 2:
                 if player.value() != 21:
-                    if (1-(12/13)**(21-self.value())) > (self.value()-16)/6):
+                    if (1-(12/13)**(21-self.value())) > (self.value()-16)/6:
                         draw = True
             else:
-                if (1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*13))):
+                if (1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*13)):
                     draw = True
         return draw
 
