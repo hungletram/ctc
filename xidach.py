@@ -105,13 +105,13 @@ class dealer_xidach(player_xidach):
     # Tính các xác suất để quyết định rút bài
     def strategy(self,player):
         draw = self.premature()
-        if self.value() in range(1,21):
+        if self.value() in range(16,21):
             if len(player.cards) == 2:
                 if player.value() != 21:
-                    if ((1-(12/13)**(21-self.value())) > (self.value()-16)/6) and (self.value() in range(1,21)):
+                    if (1-(12/13)**(21-self.value())) > (self.value()-16)/6):
                         draw = True
             else:
-                if ((1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*13))) and (self.value() in range(1,21)):
+                if (1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*10))):
                     draw = True
         return draw
 
