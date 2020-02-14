@@ -111,7 +111,7 @@ class dealer_xidach(player_xidach):
                     if (1-(12/13)**(21-self.value())) > (self.value()-16)/6):
                         draw = True
             else:
-                if (1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*10))):
+                if (1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*13))):
                     draw = True
         return draw
 
@@ -170,5 +170,5 @@ class xidach():
                 print(self.result())
             playmore = str(input('Chơi tiếp (0=không, 1=có)? ')) if self.player.bank > 0 else '0'
         print('{} còn {:,}.'.format(self.player.name,self.player.bank))
-
-xidach().play()
+game = xidach()
+game.play()
