@@ -81,8 +81,8 @@ class player_xidach():
 
         # Quắc
         else:
-            s = sum(points)
-        return 0 if s in range(22,79) else s
+            s = 0
+        return 0
     
     # Người chơi chưa đủ tuổi
     premature = lambda self: (self.value() in range(1,16)) and (len(self.cards) < 5)
@@ -105,13 +105,13 @@ class dealer_xidach(player_xidach):
     # Tính các xác suất để quyết định rút bài
     def strategy(self,player):
         draw = self.premature()
-        if self.value() in range(16,21):
+        if self.value() in range(1,21):
             if len(player.cards) == 2:
                 if player.value() != 21:
-                    if ((1-(12/13)**(21-self.value())) > (self.value()-16)/6) and (self.value() in range(16,21)):
+                    if ((1-(12/13)**(21-self.value())) > (self.value()-16)/6) and (self.value() in range(1,21)):
                         draw = True
             else:
-                if ((1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*13))) and (self.value() in range(16,21)):
+                if ((1-(12/13)**(21-self.value())) > (1-21/(len(player.cards)*13))) and (self.value() in range(1,21)):
                     draw = True
         return draw
 
@@ -142,7 +142,7 @@ class xidach():
         playmore = '1'
         self.player.name = str(input('Tên người chơi: '))
         self.player.bank = int(input('Số vốn: '))
-        while playmore != '0':
+        while (playmore != '0') and (self.player.bank > 0):
             bet = int(input('\nSố tiền {} đang có là {:,}. Bạn đặt cược bao nhiêu? '.format(self.player.name,self.player.bank)))
             self.player.bet = bet if (bet <= self.player.bank and bet > 0) else self.player.bank
             self.player.cards = []
@@ -164,7 +164,7 @@ class xidach():
                     if self.player.value() in range(1,21):
                         ask = str(input('{} Bạn có rút thêm không (0=không, 1=có)? '.format(self.player.result())))
                 
-                while self.dealer.strategy(self.player) and (self.dealer.value() in range(1,21)):
+                while self.dealer.strategy(self.player):
                     self.dealer.cards += [self.deck.deck.pop(0)]
                 
                 print(self.result())
