@@ -4,15 +4,14 @@ if __name__ == "__main__":
 # Đối tượng bộ bài
 class deck_of_cards():
 
-    # Bộ bài chuẩn: 52 lá xếp theo thứ tự A-K, ♠-♥
-    suits = ['♠','♣','♦','♥']
-    ranks = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-    deck_reset = []
-    for rank in ranks:
-        for suit in suits:
-            deck_reset += [rank+suit]
-
     def __init__(self):
+        # Bộ bài chuẩn: 52 lá xếp theo thứ tự A-K, ♠-♥
+        suits = ['♠','♣','♦','♥']
+        ranks = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+        self.deck_reset = []
+        for rank in ranks:
+            for suit in suits:
+                self.deck_reset += [rank+suit]
         self.deck = []
 
     # Trở về bộ bài chuẩn
