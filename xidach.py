@@ -171,4 +171,3 @@ class xidach():
         print('{} còn {:,}.'.format(self.player.name,self.player.bank))
 game = xidach()
 game.play()
-'why doesn\'t it change'
